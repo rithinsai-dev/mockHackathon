@@ -17,7 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Component
 @RequiredArgsConstructor
 public class AuthTokenFilter extends OncePerRequestFilter {
     private final JwtUtils jwtUtils;
@@ -39,11 +38,15 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+            } else {
+                System.out.println("JWT is null or invalid");
             }
         } catch (Exception e) {
+            e.printStackTrace();
             logger.error("Cannot set user authentication: {}", e);
         }
 
+        System.out.println("Proceeding with filter chain. User is authenticated: " + (SecurityContextHolder.getContext().getAuthentication() != null));
         filterChain.doFilter(request, response);
     }
 

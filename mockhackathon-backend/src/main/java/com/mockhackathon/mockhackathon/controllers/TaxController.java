@@ -1,4 +1,4 @@
-import com.mockhackathon.mockhackathon.controllers;
+package com.mockhackathon.mockhackathon.controllers;
 
 import com.mockhackathon.mockhackathon.dto.TaxComputationDTO;
 import com.mockhackathon.mockhackathon.entity.TaxComputation;
